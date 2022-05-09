@@ -57,4 +57,8 @@ class User extends Authenticatable
     {
         return $this->hasMany(Answer::class);
     }
+
+    // public function getNameAttribute() {
+    //     return $this->name;
+    // }
 }

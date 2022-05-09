@@ -17,8 +17,9 @@ class QuestionController extends Controller
         $question->save();
         $user = Auth::user();
         Question::where('user_id', '=', $user->id)->get('body');
-        $list_question = User::join('questions', 'users.id', '=', 'questions.user_id')
-            ->select('name', 'questions.body')->get();
+        // $list_question = User::join('questions', 'users.id', '=', 'questions.user_id')
+        //     ->select('name', 'questions.body')->get();
+        $list_question = Question::with('answers')->get();
         return response()->json([$list_question]);
     }
 
@@ -28,8 +29,7 @@ class QuestionController extends Controller
         $question->user_id = Auth::user()->id;
         $question->body = $request->input('body');
         $result = $question->save();
-        $list_question = User::join('questions', 'users.id', '=', 'questions.user_id')
-            ->select('name', 'questions.body')->get();
+        $list_question = Question::with('answers')->get();
         if ($result) {
             return response()->json(['Update Successful' => $list_question]);
         } else {
@@ -50,8 +50,7 @@ class QuestionController extends Controller
 
     public function store()
     {
-        $list_question = User::join('questions', 'users.id', '=', 'questions.user_id')
-            ->select('name', 'questions.body')->get();
-        return response()->json($list_question);
+        $list_question = Question::with('answers')->get();
+        return response()->json([$list_question], 200);
     }
 }

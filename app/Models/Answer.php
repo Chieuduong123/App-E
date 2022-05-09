@@ -15,20 +15,27 @@ class Answer extends Model
         'body',
     ];
 
-    public function commentable(){
-
-        return $this->morphTo();
- 
-    }
- 
+    protected $appends = ['name'];
 
     public function question()
     {
         return $this->belongsTo(Question::class);
     }
+
     public function replies()
     {
         return $this->hasMany(Answer::class, 'question_id');
     }
- 
+    public function user()
+    {
+        return $this->belongsTo(User::class)->select(['name']);
+    }
+
+    public function getNameAttribute()
+    {
+        if ($this->user) {
+            return $this->user->name;
+        }
+        return null;
+    }
 }

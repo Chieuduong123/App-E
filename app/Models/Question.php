@@ -13,6 +13,7 @@ class Question extends Model
         'user_id',
         'body',
     ];
+    protected $appends = ['name'];
 
     public function user()
     {
@@ -23,4 +24,12 @@ class Question extends Model
     {
         return $this->hasMany(Answer::class, 'question_id');
     }
+
+    public function getNameAttribute() {
+        if ($this->user) {
+            return $this->user->name;
+        }
+       return null;
+    }
+
 }

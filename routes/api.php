@@ -36,11 +36,11 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 Route::get('/level', 'KindController@level');
 Route::get('/level/{id}', 'KindController@showLevel');
-//Route::get('/kind', 'KindController@kind');
 Route::get('/kind/{id}', 'VocabularyController@showVocabulary');
 Route::get('/kind/detail/{id}', 'VocabularyController@detailVocabulary');
+Route::get('/search', 'VocabularyController@getSearchVocabulary');
 
 
 
-Route::get('/show/{id}', 'AnswerController@showPost');
-Route::get('/show', 'AnswerController@show');
+// Route::get('/show/{id}', 'AnswerController@showPost');
+// Route::get('/show', 'AnswerController@show');
