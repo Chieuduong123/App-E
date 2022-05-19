@@ -18,9 +18,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::post('/register', 'Auth\UserController@register');
 Route::post('/login', 'Auth\UserController@postLogin');
@@ -36,9 +34,11 @@ Route::group(['middleware' => ['auth:api']], function () {
 
 Route::get('/level', 'KindController@level');
 Route::get('/level/{id}', 'KindController@showLevel');
-Route::get('/kind/{id}', 'VocabularyController@showVocabulary');
-Route::get('/kind/detail/{id}', 'VocabularyController@detailVocabulary');
+Route::get('/level/kind/{id}', 'VocabularyController@showVocabulary');
+Route::get('/level/kind/detail/{id}', 'VocabularyController@detailVocabulary');
 Route::get('/search', 'VocabularyController@getSearchVocabulary');
+
+
 
 
 

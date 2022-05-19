@@ -21,7 +21,7 @@ class UserController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $success['remember_token'] =  $this->genarateKey();
+        $success['remember_token'] = $this->genarateKey();
         $user = User::create($input);
         return response()->json(['success'=>$user]); 
     }
@@ -34,7 +34,7 @@ class UserController extends Controller
 
     public function postLogin(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password')])) {
+        if (Auth::attempt(['email' => request('email'), 'password' => request('password'), 'type' => 2])) {
             $user = Auth::user();
             $user = $request->user();
             $success['token'] = $user->createToken('MyApp')->accessToken;
@@ -57,4 +57,5 @@ class UserController extends Controller
         $response = ['message' => 'You have been successfully logged out!'];
         return response($response, 200);
     }
+
 }

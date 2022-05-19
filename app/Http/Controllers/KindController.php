@@ -11,8 +11,8 @@ class KindController extends Controller
     {
         $level1 = Kind::where('level', '=', 1)->first('level');
         $level2 = Kind::where('level', '=', 2)->first('level');
-        //$level3 = Kind::where('level', '=', 3)->first('level');
-        return response()->json([$level1, $level2]);
+        $level3 = Kind::where('level', '=', 3)->first('level');
+        return response()->json([$level1, $level2, $level3]);
     }
 
     public function showLevel($level)
