@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Question;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,11 +23,12 @@ class QuestionController extends Controller
         return response()->json([$list_question]);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Question $question)
     {
-        $question = Question::find($id);
+        // $question = Question::find($request->$id);
         $question->user_id = Auth::user()->id;
-        $question->body = $request->input('body');
+        $newQuestion = $request->body;
+        $question->body = $newQuestion;
         $result = $question->save();
         $list_question = Question::with('answers')->get();
         if ($result) {
@@ -36,12 +38,12 @@ class QuestionController extends Controller
         }
     }
 
-    public function delete($id)
+    public function delete(Question $question)
     {
-        $question = Question::find($id);
         $result = $question->delete();
+        $list_question = Question::with('answers')->get();
         if ($result) {
-            return ["Delete Successfull"];
+            return response()->json(['Delete Successful' => $list_question]);
         } else {
             return ["Delete Failed"];
         }
@@ -49,7 +51,19 @@ class QuestionController extends Controller
 
     public function store()
     {
-        $list_question = Question::with('answers')->get();
+        //$list_question = Question::with('answers')->get();
+        $list_question = User::join('questions', 'users.id', '=', 'questions.user_id')
+            ->select('name', 'questions.body')->get();
         return response()->json([$list_question], 200);
+    }
+
+    public function showQuestion($question)
+    {
+        $showQuestion = Question::find($question);
+        if (is_null($showQuestion)) {
+            return response()->json('not found', 404);
+        }
+        $question = Question::with('answers')->where('id', '=', $question)->get();
+        return response()->json([$question], 200);
     }
 }

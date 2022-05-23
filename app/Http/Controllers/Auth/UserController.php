@@ -21,15 +21,15 @@ class UserController extends Controller
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $success['remember_token'] = $this->genarateKey();
+       // $success['remember_token'] = $this->genarateKey();
         $user = User::create($input);
         return response()->json(['success'=>$user]); 
     }
 
-    public function genarateKey()
-    {
-        return hash_hmac('sha256', str_random(40), config('app.key'));
-    }
+    // public function genarateKey()
+    // {
+    //     return hash_hmac('sha256', str_random(40), config('app.key'));
+    // }
 
 
     public function postLogin(Request $request)

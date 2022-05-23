@@ -26,10 +26,11 @@ Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/logout', 'Auth\UserController@logout');
     Route::post('/profile', 'Auth\UserController@details');
     Route::get('/question', 'QuestionController@store');
-    Route::post('/question/create', 'QuestionController@create');
-    Route::post('/question/update/{id}', 'QuestionController@update');
-    Route::post('/question/delete/{id}', 'QuestionController@delete');
-    Route::post('/answer/create/{id}', 'AnswerController@answer');
+    Route::get('/question/{question}', 'QuestionController@showQuestion');
+    Route::post('/question', 'QuestionController@create');
+    Route::put('/question/{question}', 'QuestionController@update');
+    Route::delete('/question/{question}', 'QuestionController@delete');
+    Route::post('/answer/{question}', 'AnswerController@createAnswer');
 });
 
 Route::get('/level', 'KindController@level');
@@ -37,7 +38,6 @@ Route::get('/level/{id}', 'KindController@showLevel');
 Route::get('/level/kind/{id}', 'VocabularyController@showVocabulary');
 Route::get('/level/kind/detail/{id}', 'VocabularyController@detailVocabulary');
 Route::get('/search', 'VocabularyController@getSearchVocabulary');
-
 
 
 

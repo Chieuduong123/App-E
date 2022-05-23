@@ -21,12 +21,12 @@ use Illuminate\Support\Facades\Route;
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/', function () {
-    return view('auth/login');
-});
+// Route::get('/', function () {
+//     return view('auth/login');
+// });
 
 //Register --/  Login --/
-Route::get('/login', 'App\Http\Controllers\Admin\LoginController@getLogin')->name('login');
+//Route::get('/login', 'App\Http\Controllers\Admin\LoginController@getLogin')->name('login');
 // Route::get('/login', ['as' => 'login', 'uses' => 'App\Http\Controllers\Admin\LoginController@getLogin'])->name('login');
 // Route::post('/login', ['as' => 'login', 'uses' => 'App\Http\Controllers\Admin\LoginController@postLogin'])->name('login');
 // Route::get('/logout', ['as' => 'getLogout', 'uses' => 'App\Http\Controllers\Admin\LoginController@getLogout']);
