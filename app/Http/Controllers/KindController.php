@@ -17,7 +17,10 @@ class KindController extends Controller
 
     public function showLevel($level)
     {
-        $level = Kind::where('level', $level)->get('kind_name')->groupBy('level');
+        $level = Kind::where('level', $level)->select('id', 'kind_name', 'level')->get();
+        if ($level->isEmpty()) {
+            return response()->json(['error' => 'Model not found'], 404);
+        }
         return response()->json($level);
     }
 

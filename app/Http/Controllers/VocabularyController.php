@@ -9,7 +9,7 @@ class VocabularyController extends Controller
 {
     public function showVocabulary($id)
     {
-        $vocabulary = Vocabulary::where('kind_id', $id)->get('word');
+        $vocabulary = Vocabulary::where('kind_id', $id)->select('word', 'id')->get();
         if ($vocabulary->isEmpty()) {
             return response()->json(['error' => 'Model not found'], 404);
         }
@@ -19,7 +19,7 @@ class VocabularyController extends Controller
     public function detailVocabulary($id)
     {
         $vocabulary = Vocabulary::where('id', $id)
-            ->select('word', 'type_word', 'phonetic', 'audio', 'definition')
+            ->select('id', 'kind_id', 'word', 'type_word', 'phonetic', 'audio', 'definition')
             ->get();
         if ($vocabulary->isEmpty()) {
             return response()->json(['error' => 'Model not found'], 404);

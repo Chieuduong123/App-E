@@ -47,7 +47,7 @@ class UserController extends Controller
     public function details()
     {
         $user = Auth::user();
-        return response()->json(['success' => $user]);
+        return response()->json(['message' => 'Successfully','success' => $user]);
     }
 
     public function logout(Request $request)

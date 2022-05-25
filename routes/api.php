@@ -34,9 +34,9 @@ Route::group(['middleware' => ['auth:api']], function () {
 });
 
 Route::get('/level', 'KindController@level');
-Route::get('/level/{id}', 'KindController@showLevel');
-Route::get('/level/kind/{id}', 'VocabularyController@showVocabulary');
-Route::get('/level/kind/detail/{id}', 'VocabularyController@detailVocabulary');
+Route::get('/level/{level}', 'KindController@showLevel');
+Route::get('/kind/{kind_id}', 'VocabularyController@showVocabulary');
+Route::get('/kind/detail/{id}', 'VocabularyController@detailVocabulary');
 Route::get('/search', 'VocabularyController@getSearchVocabulary');
 
 
