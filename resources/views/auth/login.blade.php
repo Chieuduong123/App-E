@@ -1,104 +1,87 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" class="light-style customizer-hide" dir="ltr" data-theme="theme-default" data-assets-path="../assets/" data-template="vertical-menu-template-free">
 
 <head>
-    <title>Đăng Nhập | Dream Shop</title>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
 
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900&display=swap" rel="stylesheet">
+  <title>Login</title>
+  <meta name="description" content="" />
+  <link rel="icon" type="image/x-icon" href="../assets/img/favicon/favicon.ico" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <link rel="stylesheet" href="{{asset('css/css.css')}}">
-
+  <link rel="stylesheet" href="{{asset('css/core.css')}}" class="template-customizer-core-css" />
+  <link rel="stylesheet" href="{{asset('css/theme-default.css')}}" class="template-customizer-theme-css" />
+  <link rel="stylesheet" href="{{asset('css/demo.css')}}" />
+  <link rel="stylesheet" href="{{asset('css/page-auth.css')}}" />
 </head>
 
 <body>
-    <section class="ftco-section">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-md-12 col-lg-10">
-                    <div class="wrap d-md-flex">
-                        <div class="text-wrap p-4 p-lg-5 text-center d-flex align-items-center order-md-last">
-                            <div class="text w-100">
-                                <h2>Welcome To My Shop</h2>
-                                <p>Don't have an account?</p>
-                                <a href="register" class="btn btn-white btn-outline-white">Sign Up</a>
-                            </div>
-                        </div>
-                        <div class="login-wrap p-4 p-lg-5">
-                            <div class="d-flex">
-                                <div class="w-100">
-                                    <h3 class="mb-4">Sign In</h3>
-                                </div>
-                                <div class="w-100">
-                                    <p class="social-media d-flex justify-content-end">
-                                        <a href="#"
-                                            class="social-icon d-flex align-items-center justify-content-center"><span
-                                                class="fa fa-facebook"></span></a>
-                                        <a href="#"
-                                            class="social-icon d-flex align-items-center justify-content-center"><span
-                                                class="fa fa-twitter"></span></a>
-                                    </p>
-                                </div>
-                            </div>
-                            <form role="form" action="{{ url('/login') }}" method="POST">
-                                {!! csrf_field() !!}
-                                <div class="form-group mb-3">
-                                    <label class="label" for="name">Username</label>
-                                    <input type="text" name="name" class="form-control" placeholder="Username" required>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label class="label" for="password">Password</label>
-                                    <input type="password" name="password" class="form-control" placeholder="Password"
-                                        required>
-                                </div>
-                                <?php //Hiển thị thông báo lỗi?>
-                                @if ( Session::has('error') )
-                                <div class="alert alert-danger alert-dismissible" role="alert">
-                                    <strong>{{ Session::get('error') }}</strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        <span class="sr-only">Close</span>
-                                    </button>
-                                </div>
-                                @endif
-                                @if ($errors->any())
-                                <div class="alert alert-danger alert-dismissible" role="alert">
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                        <span class="sr-only">Close</span>
-                                    </button>
-                                </div>
-                                @endif
-                                <div class="form-group">
-                                    <button type="submit" class="form-control btn btn-primary submit px-3">Sign
-                                        In</button>
-                                </div>
-                                <div class="form-group d-md-flex">
+  <div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+      <div class="authentication-inner">
+        <!-- Register -->
+        <div class="card">
+          <div class="card-body">
+            <!-- Logo -->
+            <div class="app-brand justify-content-center">
+              <span class="app-brand-logo demo">
 
-                                    <a href="">Return</a>
-
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+              </span>
+              <span class="app-brand-text demo text-body fw-bolder">WELCOME TO KOLA LEANING</span>
+              </a>
             </div>
+            <!-- /Logo -->
+            <h4 class="mb-2">LOGIN TO ADMIN 👋</h4>
+            <p class="mb-4">Login here!</p>
+
+            <form id="formAuthentication" class="mb-3" action="{{url('/login')}}" method="POST">
+              {!! csrf_field() !!}
+              <div class="mb-3">
+                <label class="form-label">Email</label>
+                <input type="text" class="form-control" name="email" placeholder="Enter your email or username" autofocus />
+              </div>
+
+              <div class="input-group input-group-merge">
+                <input type="password" id="password" class="form-control" name="password" placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;" aria-describedby="password" />
+                <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+              </div>
+          </div>
+          <?php //Hiển thị thông báo lỗi
+          ?>
+          @if ( Session::has('error') )
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <strong>{{ Session::get('error') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          @endif
+          @if ($errors->any())
+          <div class="alert alert-danger alert-dismissible" role="alert">
+            <ul>
+              @foreach ($errors->all() as $error)
+              <li>{{ $error }}</li>
+              @endforeach
+            </ul>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+              <span class="sr-only">Close</span>
+            </button>
+          </div>
+          @endif
+          <div class="mb-3">
+            <button class="btn btn-primary d-grid w-100" type="submit">Sign in</button>
+          </div>
+          </form>
         </div>
-    </section>
-
-    <script src="{{asset('js/login1.js')}}"></script>
-    <script src="{{asset('js/login2.js')}}"></script>
-    <script src="{{asset('js/login3.js')}}"></script>
-    <script src="{{asset('js/login4.js')}}"></script>
-
+      </div>
+    </div>
+  </div>
+  </div>
 </body>
 
 </html>

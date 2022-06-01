@@ -54,7 +54,7 @@ class QuestionController extends Controller
         //$list_question = Question::with('answers')->get();
         $list_question = User::join('questions', 'users.id', '=', 'questions.user_id')
             ->select('name', 'questions.body')->get();
-        return response()->json([$list_question], 200);
+        return response()->json($list_question, 200);
     }
 
     public function showQuestion($question)

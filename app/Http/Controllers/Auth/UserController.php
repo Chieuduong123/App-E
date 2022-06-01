@@ -22,28 +22,24 @@ class UserController extends Controller
         $email = $request->email;
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        // $success['remember_token'] = $this->genarateKey();
         $user = User::create($input);
-        require 'PHPMailer/vendor/autoload.php';
-        require 'PHPMailer/PHPMailer.php';
 
-        $PHPMailer = new PHPMailer(true);
-
-        $PHPMailer->SMTPDebug = 0;
-        $PHPMailer->isSMTP();
-        $PHPMailer->Host = 'smtp.gmail.com';
-        $PHPMailer->SMTPAuth = true;
-        $PHPMailer->Username = 'anhd10315@gmail.com';
-        $PHPMailer->Password = 'vwsypottasjcjkwx';
-        $PHPMailer->SMTPSecure = 'ssl';
-        $PHPMailer->Port = 465;
-        $PHPMailer->setFrom('anhd10315@gmail.com', 'anhduong');
-        $PHPMailer->addAddress($email);
-        $PHPMailer->isHTML(true);
-        $PHPMailer->Subject = 'Email verification';
-        $PHPMailer->Body = "<h2>You have Register! Welcome to KoLa Learning <br> 
+        $phpMailer = new PHPMailer(true);
+        $phpMailer->SMTPDebug = 0;
+        $phpMailer->isSMTP();
+        $phpMailer->Host = env('EMAIL_HOST');
+        $phpMailer->SMTPAuth = true;
+        $phpMailer->Username = env('EMAIL_USERNAME');
+        $phpMailer->Password = env('EMAIL_PASSWORD');
+        $phpMailer->SMTPSecure = 'ssl';
+        $phpMailer->Port = 465;
+        $phpMailer->setFrom('anhd10315@gmail.com', 'anhduong');
+        $phpMailer->addAddress($email);
+        $phpMailer->isHTML(true);
+        $phpMailer->Subject = 'Email verification';
+        $phpMailer->Body = "<h2>You have Register! Welcome to KoLa Learning <br> 
         Wish you a happy learning day with KoLa </h2>";
-        $PHPMailer->send();
+        $phpMailer->send();
         return response()->json(['success' => $user, 'message' => 'Please check your Email or Spam your Email']);
     }
 
@@ -59,9 +55,9 @@ class UserController extends Controller
             $user = Auth::user();
             $user = $request->user();
             $success['token'] = $user->createToken('MyApp')->accessToken;
-            return response()->json(['success' => $success, 'user' => $user]);
+            return response()->json(['message' => 'true', 'token' => $success, 'user' => $user]);
         } else {
-            return response()->json(['error' => 'Unauthorised'], 401);
+            return response()->json(['message' => 'Unauthorised'], 401);
         }
     }
 

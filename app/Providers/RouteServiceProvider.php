@@ -44,18 +44,11 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/api.php'));
 
             Route::middleware('web')
-                ->namespace($this->namespace)
+                ->namespace('App\Http\Controllers')
                 ->group(base_path('routes/web.php'));
         });
     }
 
-    protected function mapTeacherRoutes()
-   {
-       Route::prefix('teacher')
-           ->middleware('api')
-           ->namespace($this->namespace)
-           ->group(base_path('routes/api.php'));
-   }
 
     /**
      * Configure the rate limiters for the application.

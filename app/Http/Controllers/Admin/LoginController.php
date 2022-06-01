@@ -4,34 +4,36 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 class LoginController extends Controller
 {
-    public function getLogin()
+    function getLogin()
     {
-        dd(111);
         return view('auth/login');
     }
 
-    public function postLogin()
+    function postLogin(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password'), 'type' => 1])) {
-            return redirect('admin');   
+        $rules = [
+            'email' => 'required',
+            'password' => 'required'
+        ];
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return redirect('login')->withErrors($validator)->withInput();
         } else {
-            Session::flash('error', 'Email or password error!');
-            return redirect('login');
+            $email = $request->input('email');
+            $password = $request->input('password');
+
+            if (Auth::attempt(['email' => $email, 'password' => $password, 'type' => 1])) {
+                return redirect('/admin');
+            } else {
+                Session::flash('error', 'Email hoặc mật khẩu không đúng!');
+                return redirect('/login');
+            }
         }
-    }
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
-
-    public function getLogout()
-    {
-        Auth::logout();
-        return redirect('login');
     }
 }
