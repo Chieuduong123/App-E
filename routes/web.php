@@ -28,6 +28,8 @@ Route::group(['middleware' => ['web','auth']], function () {
     Route::get('/admin', 'Admin\AdminController@index')->name('admin');
     Route::get('/question', 'Admin\AdminController@showQuestion')->name('showQuestion');
     Route::get('question/{id}', 'Admin\AdminController@destroyQuestion')->name('questions.destroy');
+    Route::get('/answer/{id}', 'Admin\AdminController@showAnswer')->name('showAnswer');
+    Route::get('answers/{id}', 'Admin\AdminController@destroyAnswer')->name('answers.destroy');
     Route::get('/showVideo', 'Admin\AdminController@showVideo')->name('showVideo');
     Route::get('/createVideo', 'Admin\AdminController@createVideo')->name('video.create');
     Route::post('/storeVideo', 'Admin\AdminController@storeVideo')->name('video.store');

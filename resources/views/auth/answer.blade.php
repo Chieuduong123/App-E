@@ -44,40 +44,38 @@
                 </nav>
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
-                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Questions</h4>
+                        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Tables /</span> Answers</h4>
                         <div class="card">
-                            <h5 class="card-header">Manage Questions</h5>
+                            <h5 class="card-header">Manage Answers</h5>
                             <div class="table-responsive text-nowrap">
                                 <table class="table" id="myTable2">
                                     <thead>
                                         <tr>
                                             <th onclick="sortTable(0)">ID</th>
                                             <th onclick="sortTable(1)">Author</th>
-                                            <th onclick="sortTable(2)">Question</th>
+                                            <th onclick="sortTable(2)">Answers</th>
                                             <th>Action</th>
                                           
                                         </tr>
                                     </thead>
-                                    @foreach($questions as $question)
+                                    @foreach($answers as $answer)
                                     <tbody class="table-border-bottom-0">
                                         <tr>
-                                            <td>{{$question->id}}</td>
-                                            <td>{{$question->name}}</td>
-                                            <td>{{$question->body}}</td>
+                                            <td>{{$answer->id}}</td>
+                                            <td>{{$answer->name}}</td>
+                                            <td>{{$answer->body}}</td>
                                             <td>
-                                                <a class="btn btn-primary" href="{{ route('showAnswer', $question->id) }}">Answers</a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <a class="btn btn-danger" href="{{ route('questions.destroy',$question->id) }}">Delete</a>
-                                                <!-- <button type="submit" class="btn btn-danger">Delete</button> -->
-                                            </td>
+                                                <a class="btn btn-danger" href="{{ route('answers.destroy',$answer->id) }}">Delete</a>
+                                            </td> 
                                             
                                         </tr>
                                     </tbody>
                                     @endforeach
                                 </table>
                                 <div class="d-flex justify-content-center">
-                                    {{$questions->links("pagination::bootstrap-4")}}
+                                    {{$answers->links("pagination::bootstrap-4")}}
                                 </div>
                             </div>
                         </div>

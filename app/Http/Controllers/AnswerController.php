@@ -28,7 +28,8 @@ class AnswerController extends Controller
     //     if (is_null($postFind)) {
     //         return response()->json('not found', 404);
     //     }
-    //     $post = Question::with('answers')->where('id', '=', $id)->get();
+    //     // $post = Question::with('answers')->where('id', '=', $id)->get();
+    //     $post = Question::join('answers', 'questions.id', '=', 'answers.question_id')->get();
     //     return response()->json([$post], 200);
     // }
 }
