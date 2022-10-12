@@ -22,13 +22,17 @@ class Answer extends Model
         return $this->belongsTo(Question::class);
     }
 
+    public function answers()
+    {
+        return $this->belongsTo(Answer::class, 'question_id')->select('body');
+    }
     public function replies()
     {
         return $this->hasMany(Answer::class, 'question_id');
     }
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class)->select(['name']);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function getNameAttribute()

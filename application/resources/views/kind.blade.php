@@ -10,7 +10,7 @@
 
 <body>
     @foreach ($kinds as $kind)
-        <a href="{{ route('kind-detail', $kind->level) }}">
+        <a href="{{ route('kind', $kind->id) }}">
             <h2>{{ $kind->kind_name }}</h2>
         </a>
     @endforeach

@@ -15,21 +15,21 @@ class Question extends Model
     ];
     protected $appends = ['name'];
 
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class)->select(['id', 'name',]);
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function answers()
     {
-        return $this->hasMany(Answer::class, 'question_id');
+        return $this->hasMany(Answer::class, 'question_id', 'id');
     }
 
-    public function getNameAttribute() {
+    public function getNameAttribute()
+    {
         if ($this->user) {
             return $this->user->name;
         }
-       return null;
+        return null;
     }
-
 }

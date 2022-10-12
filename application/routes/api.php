@@ -23,19 +23,19 @@ Route::post('/login', 'Auth\UserController@postLogin');
 Route::group(['middleware' => ['auth:api']], function () {
     Route::post('/logout', 'Auth\UserController@logout');
     Route::post('/profile', 'Auth\UserController@details');
-    Route::get('/question', 'QuestionController@store');
-    Route::get('/question/{question}', 'QuestionController@showQuestion');
-    Route::post('/question', 'QuestionController@create');
-    Route::put('/question/{question}', 'QuestionController@update');
-    Route::delete('/question/{question}', 'QuestionController@delete');
-    Route::post('/answer/{question}', 'AnswerController@createAnswer');
+    Route::get('/question', 'Api\QuestionController@store');
+    Route::get('/question/{question}', 'Api\QuestionController@showQuestion');
+    Route::post('/question', 'Api\QuestionController@create');
+    Route::put('/question/{question}', 'Api\QuestionController@update');
+    Route::delete('/question/{question}', 'Api\QuestionController@delete');
+    Route::post('/answer/{question}', 'Api\AnswerController@createAnswer');
 });
 
-Route::get('/level', 'KindController@level');
-Route::get('/level/{level}', 'KindController@showLevel');
-Route::get('/kind/{kind_id}', 'VocabularyController@showVocabulary');
-Route::get('/kind/detail/{id}', 'VocabularyController@detailVocabulary');
-Route::get('/search', 'VocabularyController@getSearchVocabulary');
+Route::get('/level', 'Api\KindController@level');
+Route::get('/level/{level}', 'Api\KindController@showLevel');
+Route::get('/kind/{kind_id}', 'Api\VocabularyController@showVocabulary');
+Route::get('/kind/detail/{id}', 'Api\VocabularyController@detailVocabulary');
+Route::get('/search', 'Api\VocabularyController@getSearchVocabulary');
 
 
 

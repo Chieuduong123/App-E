@@ -9,8 +9,10 @@
 </head>
 
 <body>
-    @foreach ($vovabularies as $vocabulary)
-        <h3>{{ $vocabulary->word }}</h3>
+    @foreach ($vocabularies as $vocabulary)
+        <a href="{{ route('vocabulary', $vocabulary->id) }}">
+            <h3>{{ $vocabulary->word }}</h3>
+        </a>
     @endforeach
 
 </body>
