@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(KindSeeder::class);
         $this->call(VocabularySeeder::class);
         $this->call(VideoSeeder::class);
+        $this->call(QuestionSeeder::class);
+        $this->call(AnswerSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

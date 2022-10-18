@@ -14,8 +14,8 @@ class CreateVocabulariesTable extends Migration
     public function up()
     {
         Schema::create('vocabularies', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('kind_id');
+            $table->id();
+            $table->unsignedBigInteger('kind_id');
             $table->foreign('kind_id')->references('id')->on('kinds')->onDelete('cascade');
             $table->string('word');
             $table->string('type_word');

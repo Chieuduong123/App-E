@@ -31,7 +31,7 @@ class LoginController extends Controller
             // if (Auth::attempt(['email' => $email, 'password' => $password, 'type' => 1])) {
             //     return redirect('/admin');
             if (Auth::attempt(['email' => $email, 'password' => $password])) {
-                return (Auth::user()->type == 1) ? redirect('/admin') : redirect('question');
+                return (Auth::user()->is_admin == true) ? redirect('/admin') : redirect('question');
             } else {
                 Session::flash('error', 'Email hoặc mật khẩu không đúng!');
                 return redirect('/login');

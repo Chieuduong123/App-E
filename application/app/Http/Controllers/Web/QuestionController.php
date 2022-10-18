@@ -3,11 +3,8 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Controllers\Controller;
-use App\Models\Kind;
+use App\Models\Answer;
 use App\Models\Question;
-use App\Models\User;
-use App\Models\Video;
-use App\Models\Vocabulary;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -29,5 +26,15 @@ class QuestionController extends Controller
         $user = Auth::user();
         Question::where('user_id', '=', $user->id)->get('body');
         return redirect()->back()->withSuccess('Suss');
+    }
+
+    public function createAnswer($showQuestion, Request $request)
+    {
+        $answer = new Answer();
+        $answer->user_id = $request->user()->id;
+        $answer->question_id = $showQuestion;
+        $answer->body = $request->body;
+        $answer->save();
+        return back();
     }
 }

@@ -14,7 +14,7 @@ class CreateKindsTable extends Migration
     public function up()
     {
         Schema::create('kinds', function (Blueprint $table) {
-            $table->increments('id');
+            $table->id();
             $table->string('kind_name');
             $table->string('level');
             $table->timestamps();

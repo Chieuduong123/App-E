@@ -18,6 +18,7 @@ class UserController extends Controller
             'email' => 'required',
             'phone' => 'required',
             'password' => 'required|string|min:6',
+            'is_admin' => false,
         ]);
         $email = $request->email;
         $input = $request->all();
@@ -49,10 +50,10 @@ class UserController extends Controller
     // }
 
 
- 
+
     public function postLogin(Request $request)
     {
-        if (Auth::attempt(['email' => request('email'), 'password' => request('password'), 'type' => 2])) {
+        if (Auth::attempt(['email' => request('email'), 'password' => request('password'), 'is_admin' => false])) {
             $user = Auth::user();
             $user = $request->user();
             $success = $user->createToken('MyApp')->accessToken;

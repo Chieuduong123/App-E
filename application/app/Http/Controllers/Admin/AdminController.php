@@ -14,7 +14,7 @@ class AdminController extends Controller
 {
     public function index()
     {
-        $users = User::where('type', '=', 2)->orderByDesc('id')->paginate(5);
+        $users = User::where('is_admin', '=', false)->orderByDesc('id')->paginate(5);
         return view('auth/admin', compact('users'));
     }
 

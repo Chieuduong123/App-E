@@ -25,8 +25,10 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'type',
-        'remember_token'
+        'is_admin',
+        'is_online',
+        'remember_token',
+        'last_activity',
     ];
 
 
@@ -59,6 +61,10 @@ class User extends Authenticatable
         return $this->hasMany(Answer::class);
     }
 
+    public function message()
+    {
+        return $this->hasMany(Messenger::class);
+    }
     // public function getNameAttribute() {
     //     return $this->name;
     // }

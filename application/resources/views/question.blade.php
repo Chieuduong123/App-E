@@ -17,14 +17,24 @@
             <ul> {{ $answer->users->name }}</ul>
             <ul> {{ $answer->body }}</ul>
         @endforeach
-    @endforeach
 
+        <form method="post" action="{{ route('answer.create', $showQuestion->id) }}" method="POST"
+            enctype="multipart/form-data">
+            {{ csrf_field() }}
+            <div class="form-group">
+                <input type="text" name="body" class="form-control" />
+            </div>
+            <div class="form-group">
+                <input type="submit" class="btn btn-warning" value="Add Comment" />
+            </div>
+        </form>
+    @endforeach
 
     <form class="form-horizontal" action="{{ route('question.create') }}" method="POST" enctype="multipart/form-data">
         {{ csrf_field() }}
         <fieldset>
             <!-- Form Name -->
-            <legend style="text-align: center; color: blueviolet"><strong>ADD SPORTS</strong></legend>
+            <legend style="text-align: center; color: blueviolet"><strong>ADD QUESTION</strong></legend>
 
             <!-- Text input-->
             <div class="form-group">
@@ -34,7 +44,6 @@
                         type="text">
                 </div>
             </div>
-
 
             <!-- Button -->
             <div class="form-group">

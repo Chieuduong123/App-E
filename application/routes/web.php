@@ -3,6 +3,8 @@
 use App\Http\Controllers\Admin\LoginController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Web\BotManController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -14,6 +16,14 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::get('/bot', function () {
+    return view('welcome');
+});
+
+
+Route::match(['get', 'post'], 'botman', [BotManController::class, 'handle']);
 
 Route::get('login', [
     'as' => 'login',
@@ -36,6 +46,11 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('video/{id}', 'Admin\AdminController@destroyVideo')->name('videos.destroy');
 
     Route::post('/createQuestion', 'Web\QuestionController@createQuestion')->name('question.create');
+    Route::post('/createAnswer/{showQuestion}', 'Web\QuestionController@createAnswer')->name('answer.create');
+
+    // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/inbox', 'Web\InboxController@index')->name('inbox.index');
+    Route::get('/inbox/{id}', 'Web\InboxController@show')->name('inbox.show');
 });
 
 Route::get('/', 'Web\HomeController@index')->name('/home');
