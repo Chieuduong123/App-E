@@ -68,4 +68,14 @@ class User extends Authenticatable
     // public function getNameAttribute() {
     //     return $this->name;
     // }
+
+    public function quiz()
+    {
+        $this->hasMany(Quiz::class);
+    }
+
+    public function result()
+    {
+        $this->hasMany(Result::class);
+    }
 }
