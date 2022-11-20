@@ -14,7 +14,7 @@
                                 @endphp
                                 <a href="{{ route('inbox.show', $user->id) }}" class="text-dark link">
                                     <li class="list-group-item" wire:click="getUser({{ $user->id }})" id="user_{{ $user->id }}">
-                                        <img class="img-fluid avatar" src="https://cdn.pixabay.com/photo/2017/06/13/12/53/profile-2398782_1280.png">
+                                        <img class="img-fluid avatar" src="https://cdn-icons-png.flaticon.com/512/206/206881.png">
                                         @if($user->is_online) <i class="fa fa-circle text-success online-icon"></i> @endif {{ $user->name }}
                                         @if(filled($not_seen))
                                             <div class="badge badge-success rounded">{{ $not_seen->count() }}</div>
@@ -35,7 +35,7 @@
                     @elseif(auth()->user()->is_admin == true)
                         Select a user to see the chat
                     @elseif($admin->is_online)
-                        <i class="fa fa-circle text-success"></i> We are online
+                        <i class="fa fa-circle text-success"></i> Admin is online
                     @else
                         Messages
                     @endif

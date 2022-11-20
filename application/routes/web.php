@@ -36,7 +36,7 @@ Route::post('/login', [
 ]);
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/admin', 'Admin\AdminController@index')->name('admin');
-    Route::get('/question', 'Admin\AdminController@showQuestion')->name('showQuestion');
+    Route::get('/list-question', 'Admin\AdminController@showQuestion')->name('showAdminQuestion');
     Route::get('question/{id}', 'Admin\AdminController@destroyQuestion')->name('questions.destroy');
     Route::get('/answer/{id}', 'Admin\AdminController@showAnswer')->name('showAnswer');
     Route::get('answers/{id}', 'Admin\AdminController@destroyAnswer')->name('answers.destroy');
@@ -45,8 +45,22 @@ Route::group(['middleware' => ['web', 'auth']], function () {
     Route::post('/storeVideo', 'Admin\AdminController@storeVideo')->name('video.store');
     Route::get('video/{id}', 'Admin\AdminController@destroyVideo')->name('videos.destroy');
 
+    Route::get('/add-quiz', 'Admin\QuizController@addQuiz')->name('add.quiz');
+    Route::post('/store-quiz', 'Admin\QuizController@storeQuiz')->name('store.quiz');
+
+    Route::get('/add-quiz-question/{id}', 'Admin\QuizzQuestionController@addQuizQuestion')->name('add.question');
+    Route::post('/store-question', 'Admin\QuizzQuestionController@storeQuizQuestion')->name('store.question');
+
+
+
+
     Route::post('/createQuestion', 'Web\QuestionController@createQuestion')->name('question.create');
     Route::post('/createAnswer/{showQuestion}', 'Web\QuestionController@createAnswer')->name('answer.create');
+
+    Route::get('/quiz-list', 'Admin\QuizController@index')->name('list.quiz');
+    Route::get('/give-quiz/{id}', 'Admin\QuizController@joinQuiz')->name('join.quiz');
+    Route::post('/store-answer', 'Web\QuizzAnswerController@store')->name('store.answer');
+    Route::get('/results', 'Web\ResultController@index')->name('results');
 
     // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/inbox', 'Web\InboxController@index')->name('inbox.index');

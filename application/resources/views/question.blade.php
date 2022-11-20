@@ -1,15 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@extends('layouts/header')
 
 <body>
-    @foreach ($showQuestions as $showQuestion)
+    <section class="our-courses" id="courses">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 offset-lg-3">
+                    <div class="section-heading">
+                        <h4>ADD A NEW <em>COMMENT </em></h4>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-8 offset-lg-2">
+                <div class="comment__container opened" id="first-comment">
+                    @foreach ($showQuestions as $showQuestion)
+                        <div class="comment__card">
+                            <h3 class="comment__title">{{ $showQuestion->users->name }}</h3>
+                            <p>
+                                {{ $showQuestion->body }}
+                            </p>
+                        </div>
+                        <div class="comment__container" dataset="first-comment" id="first-reply">
+                            <div class="comment__card">
+                                @foreach ($showQuestion->answers as $answer)
+                                    <h3 class="comment__title">{{ $answer->users->name }}</h3>
+                                    <p>
+                                        {{ $answer->body }}
+                                    </p>
+                                @endforeach
+                                <form method="post" action="{{ route('answer.create', $showQuestion->id) }}"
+                                    method="POST" enctype="multipart/form-data">
+                                    {{ csrf_field() }}
+                                    <input type="text" class="form-control" id="text"
+                                        placeholder="Enter your comment">
+                                    <div class="col">
+                                        <button class="submit_cmt">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </div>
+    </section>
+    {{-- @foreach ($showQuestions as $showQuestion)
         <h2>{{ $showQuestion->users->name }}</h2>
         <h2>{{ $showQuestion->body }}</h2>
 
@@ -55,7 +89,7 @@
 
 
         </fieldset>
-    </form>
+    </form> --}}
 
 </body>
 
