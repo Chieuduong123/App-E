@@ -1,7 +1,5 @@
 @extends('layouts.dashboard')
-@section('title')
-    <title>My Results</title>
-@endsection
+@extends('layouts.header')
 @section('main')
     <h1>Result List</h1>
     <div class="text-center">
@@ -30,14 +28,13 @@
                         <td>{{ $result->title }}</td>
                         <td>{{ $result->quiz_score }}</td>
                         <td>{{ $result->achieved_score }}</td>
-                        
+
                         @if (auth()->user()->is_admin == true)
                             <td>{{ $result->name }}</td>
                             <td>{{ $result->quiz_score }}</td>
                         @endif
                         <td>{{ $result->created_at }}</td>
                     </tr>
-                    
                 @endforeach
             </tbody>
         </table>

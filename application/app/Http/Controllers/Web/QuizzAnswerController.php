@@ -17,11 +17,11 @@ class QuizzAnswerController extends Controller
         if (Carbon::now() > Carbon::parse($request->start_time)->addMinute(Quiz::where('id', $request->quiz_id)->value('duration'))) {
             return redirect()->back()->with('error', 'Time is Over');
         }
-        $db_answers = QuizzQuestion::where('quiz_id', $request->quiz_id)->get();
+        $db_questions = QuizzQuestion::where('quiz_id', $request->quiz_id)->get();
         $correct = 0;
         $total = 0;
-        foreach ($db_answers as $db_answer) {
-            if ($db_answer->correct_option == $request->answer) {
+        foreach ($db_questions as $db_question) {
+            if ($db_question->correct_option == $request->question) {
                 $correct++;
             } else {
             }

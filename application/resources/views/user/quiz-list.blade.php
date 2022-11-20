@@ -1,7 +1,6 @@
 @extends('layouts.dashboard')
-@section('title')
-    <title>Dashboard</title>
-@endsection
+@extends('layouts.header')
+
 @section('main')
     <h1>Quiz List</h1>
     <div class="text-center">

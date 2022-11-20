@@ -11,7 +11,7 @@ class ResultController extends Controller
     public function index()
     {
         if (auth()->user()->is_admin == true) {
-            return view('user.result-page')->with('results', Result::join('quizzes', 'results.quiz_id', 'quizzes.id')
+            return view('admin.result-quiz')->with('results', Result::join('quizzes', 'results.quiz_id', 'quizzes.id')
                 ->join('users', 'results.user_id', '=', 'users.id')
                 ->get());
         }

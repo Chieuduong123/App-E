@@ -36,7 +36,7 @@ Route::post('/login', [
 ]);
 Route::group(['middleware' => ['web', 'auth']], function () {
     Route::get('/admin', 'Admin\AdminController@index')->name('admin');
-    Route::get('/question', 'Admin\AdminController@showQuestion')->name('showQuestion');
+    Route::get('/list-question', 'Admin\AdminController@showQuestion')->name('showAdminQuestion');
     Route::get('question/{id}', 'Admin\AdminController@destroyQuestion')->name('questions.destroy');
     Route::get('/answer/{id}', 'Admin\AdminController@showAnswer')->name('showAnswer');
     Route::get('answers/{id}', 'Admin\AdminController@destroyAnswer')->name('answers.destroy');

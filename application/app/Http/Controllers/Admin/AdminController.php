@@ -15,19 +15,19 @@ class AdminController extends Controller
     public function index()
     {
         $users = User::where('is_admin', '=', false)->orderByDesc('id')->paginate(5);
-        return view('auth/admin', compact('users'));
+        return view('admin/admin', compact('users'));
     }
 
     public function showVideo()
     {
         $videos = Video::orderByDesc('id')->paginate(5);
-        return view('auth/video', compact('videos'));
+        return view('admin/video', compact('videos'));
     }
 
     public function createVideo()
     {
         $videos = Video::orderByDesc('id')->paginate(5);
-        return view('auth/create', compact('videos'));
+        return view('admin/create', compact('videos'));
     }
 
     public function storeVideo(Request $request)
@@ -54,7 +54,7 @@ class AdminController extends Controller
     {
         $questions = User::join('questions', 'users.id', '=', 'questions.user_id')
             ->select('questions.id', 'name', 'questions.body')->orderByDesc('id')->paginate(5);
-        return view('auth/question', compact('questions'));
+        return view('admin/question', compact('questions'));
     }
 
     public function destroyQuestion($id)
@@ -69,7 +69,7 @@ class AdminController extends Controller
         $answers = Question::join('answers', 'questions.id', '=', 'answers.question_id')
             ->where('questions.id', '=', $id)
             ->paginate(5);
-        return view('auth/answer', compact('answers'));
+        return view('admin/answer', compact('answers'));
     }
 
     public function destroyAnswer($id)

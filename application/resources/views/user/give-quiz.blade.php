@@ -1,7 +1,5 @@
 @extends('layouts.dashboard')
-@section('title')
-    <title>Quiz</title>
-@endsection
+@extends('layouts.header')
 @section('main')
     <h1>It's a Quiz Page</h1>
     <h2>Quiz Title: {{ $quiz->title }}</h2>
@@ -12,6 +10,9 @@
         {{-- @foreach ($questions as $question) --}}
         <form method="post" action="{{ route('store.answer') }}" class="crud-submit">
             @csrf
+            @php
+                $i = 1;
+            @endphp
             @foreach ($questions as $question)
                 <input type="hidden" name="user_id" value="{{ auth()->user()->id }}">
                 <input type="hidden" name="quiz_id" value="{{ $quiz->id }}" readonly required>
@@ -21,13 +22,16 @@
                     Question: {{ $question->question }}
                 </h3><br>
                 <h5>
-                    &emsp;<input type="radio" name="answer[{{ $question->id }}]" class="form-check-input"
+                    @php
+                        $i = $question->id;
+                    @endphp
+                    &emsp;<input type="radio" name="question[{{ $i }}]" class="form-check-input"
                         value="option_a">{{ $question->option_a }}<br>
-                    &emsp;<input type="radio" name="answer[{{ $question->id }}]" class="form-check-input"
+                    &emsp;<input type="radio" name="question[{{ $i }}]" class="form-check-input"
                         value="option_b">{{ $question->option_b }}<br>
-                    &emsp;<input type="radio" name="answer[{{ $question->id }}]" class="form-check-input"
+                    &emsp;<input type="radio" name="question[{{ $i }}]" class="form-check-input"
                         value="option_c">{{ $question->option_c }}<br>
-                    &emsp;<input type="radio" name="answer[{{ $question->id }}]" class="form-check-input"
+                    &emsp;<input type="radio" name="question[{{ $i }}]" class="form-check-input"
                         value="option_d">{{ $question->option_d }}<br>
                 </h5>
 
